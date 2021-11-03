@@ -7,7 +7,7 @@ use App\Services\Documents\CreateNewDocument\Base\CreateNewDocumentBase;
 
 class CreateNewDocumentService extends CreateNewDocumentBase
 {
-    public function handle(array $data): Document
+    public function handle(array $data): array
     {
         $documentType = $this->documentTypeRepository->getDocumentType(
             $data['document_type']
@@ -19,14 +19,19 @@ class CreateNewDocumentService extends CreateNewDocumentBase
             ]);
         }
 
+        $userId = $this->userRepository->getAuthenticatedUserId();
+
         $documentBuilded = $this->documentBuilder->build(
-            $data['user_id'],
+            $userId,
             $documentType->id,
             $data['document_details']
         );
 
-        return $this->documentRepository->createDocument(
+        $document = $this->documentRepository->createDocument(
             $documentBuilded->toArray()
         );
+
+        return $this->documentParserService
+            ->parse($document);
     }
 }

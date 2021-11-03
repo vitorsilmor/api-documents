@@ -175,6 +175,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+
+        /**
+         * Api Service Providers...
+         */
+        App\Providers\CreateDocumentProvider::class,
     ],
 
     /*

@@ -9,17 +9,17 @@ class Profile extends Model
 {
     use HasFactory;
 
-    protected $table = [
+    protected $fillable = [
         'name', 'user_id'
     ];
 
     public function profilePermissions()
     {
-        $this->hasMany(ProfilePermission::class, 'profile_id');
+        return $this->hasMany(ProfilePermission::class, 'profile_id');
     }
 
     public function user()
     {
-        $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

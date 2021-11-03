@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\User;
 use App\Repositories\Base\EloquentRepository;
 use App\Repositories\Contracts\IUserRepository as Repository;
+use Illuminate\Support\Facades\Auth;
 
 class UserRepository extends EloquentRepository implements Repository
 {
@@ -28,5 +29,15 @@ class UserRepository extends EloquentRepository implements Repository
             return false;
 
         return true;
+    }
+
+    public function getAuthenticatedUserId(): ?int
+    {
+        $user = Auth::user();
+
+        if (!isset($user->id))
+            return null;
+
+        return $user->id;
     }
 }

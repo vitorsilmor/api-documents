@@ -16,6 +16,16 @@ class User extends Authenticatable implements JWTSubject
         'password',
     ];
 
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company_id');
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'user_id');
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

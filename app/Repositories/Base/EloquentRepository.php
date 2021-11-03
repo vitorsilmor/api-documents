@@ -72,7 +72,7 @@ abstract class EloquentRepository
      * @param array $data
      * @return Model
      */
-    public function getOneWhere(array $data): Model
+    public function getOneWhere(array $data): ?Model
     {
         $item = $this->model->setConnection('mysql')
             ->where($data)

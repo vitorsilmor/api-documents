@@ -15,11 +15,11 @@ class Document extends Model
 
     public function type()
     {
-        $this->belongsTo(DocumentType::class, 'document_type_id');
+        return $this->belongsTo(DocumentType::class, 'document_type_id');
     }
 
     public function user()
     {
-        $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
